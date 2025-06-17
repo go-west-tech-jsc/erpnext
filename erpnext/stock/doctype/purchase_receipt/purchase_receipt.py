@@ -603,14 +603,14 @@ class PurchaseReceipt(BuyingController):
 						)
 
 		def make_amount_difference_entry(item):
-			if item.amount_difference_with_purchase_invoice and stock_asset_rbnb:
+			if item.get("amount_difference_with_purchase_invoice", 0) and stock_asset_rbnb:
 				account_currency = get_account_currency(stock_asset_rbnb)
 				self.add_gl_entry(
 					gl_entries=gl_entries,
 					account=stock_asset_rbnb,
 					cost_center=item.cost_center,
 					debit=0.0,
-					credit=flt(item.amount_difference_with_purchase_invoice),
+					credit=flt(item.get("amount_difference_with_purchase_invoice", 0)),
 					remarks=_("Adjustment based on Purchase Invoice rate"),
 					against_account=stock_asset_account_name,
 					account_currency=account_currency,
@@ -643,7 +643,7 @@ class PurchaseReceipt(BuyingController):
 				+ flt(item.landed_cost_voucher_amount)
 				+ flt(item.rm_supp_cost)
 				+ flt(item.item_tax_amount)
-				+ flt(item.amount_difference_with_purchase_invoice)
+				+ flt(item.get("amount_difference_with_purchase_invoice", 0))
 			)
 
 			divisional_loss = flt(

@@ -132,7 +132,7 @@ class RepostItemValuation(Document):
 			frappe.throw(_(msg))
 
 	def reset_recreate_stock_ledgers(self):
-		if self.recreate_stock_ledgers and self.based_on != "Transaction":
+		if self.get("recreate_stock_ledgers", None) and self.based_on != "Transaction":
 			self.recreate_stock_ledgers = 0
 
 	def get_closing_stock_balance(self):

@@ -984,7 +984,7 @@ def insert_item_price(args):
 		as_dict=1,
 	)
 
-	update_based_on_price_list_rate = stock_settings.update_price_list_based_on == "Price List Rate"
+	update_based_on_price_list_rate = stock_settings.get("update_price_list_based_on", None) == "Price List Rate"
 
 	if item_price and item_price.name:
 		if not stock_settings.update_existing_price_list_rate:
