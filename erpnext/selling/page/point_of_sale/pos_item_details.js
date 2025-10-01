@@ -257,9 +257,9 @@ erpnext.PointOfSale.ItemDetails = class {
 				if (this.value) {
 					me.events.form_updated(me.current_item, "warehouse", this.value).then(() => {
 						me.item_stock_map = me.events.get_item_stock_map();
-						const available_qty = me.item_stock_map[me.item_row.item_code][this.value][0];
+						const available_qty = me.item_stock_map?.[me.item_row.item_code]?.[this.value]?.[0];
 						const is_stock_item = Boolean(
-							me.item_stock_map[me.item_row.item_code][this.value][1]
+							me.item_stock_map?.[me.item_row.item_code]?.[this.value]?.[1]
 						);
 						if (available_qty === undefined) {
 							me.events.get_available_stock(me.item_row.item_code, this.value).then(() => {
