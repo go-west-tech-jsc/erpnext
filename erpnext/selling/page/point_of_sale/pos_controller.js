@@ -334,6 +334,8 @@ erpnext.PointOfSale.Controller = class {
 
 				numpad_event: (value, action) => this.update_item_field(value, action),
 
+				save_draft_invoice: () => this.save_draft_invoice(),
+
 				checkout: () => this.save_and_checkout(),
 
 				edit_cart: () => this.payment.edit_cart(),
